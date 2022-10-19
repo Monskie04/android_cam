@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "482933342086",
+    "firebase_url": "https://thesis-yd-ej-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "thesis-yd-ej",
+    "storage_bucket": "thesis-yd-ej.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:482933342086:android:47230e224138a56561b607",
+        "android_client_info": {
+          "package_name": "com.example.androidcam"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "482933342086-j3f3rvnarnfhp4h60a2m27lmq960vhmi.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCZQfw2aNVh8lNwx2Fyb2OLEgvKlJVuEfw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "482933342086-j3f3rvnarnfhp4h60a2m27lmq960vhmi.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

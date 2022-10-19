@@ -1,16 +1,29 @@
 package com.example.androidcam;
 
+import static android.content.ContentValues.TAG;
+
 import android.app.Activity;
 import android.content.pm.PackageManager;
 
+import android.net.Uri;
 import android.os.Bundle;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.Timestamp;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.util.Log;
 import android.util.Rational;
 import android.util.Size;
 import android.view.Surface;
@@ -37,20 +50,33 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
+import java.util.Arrays;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
 
    private int REQUEST_CODE_PERMISSIONS = 101;
    private  String[] REQUIRED_PERMISSSION = new String[]{"android.permission.CAMERA","android.permission.WRITE_EXTERNAL_STORAGE"};
-
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
+    FirebaseStorage storage = FirebaseStorage.getInstance();
     TextureView textureView;
+    StorageReference storageRef;
+    public String algo = "CNN";
+    File file1;
+    long millis;
+    String path;
 
    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        getSupportActionBar().hide();
+        //getSupportActionBar().hide();
 
         textureView=(TextureView) findViewById(R.id.view_Finder);
 
@@ -93,12 +119,107 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.imgCapture).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                File file  = new File("sdcard/photos/DCIM(0)/CameraX"+ System.currentTimeMillis());
-                imgCap.takePicture(file, new ImageCapture.OnImageSavedListener() {
+                millis = System.currentTimeMillis();
+                path = "storage/emulated/0/"+ millis;
+                 file1  = new File(path);
+                imgCap.takePicture(file1, new ImageCapture.OnImageSavedListener() {
                     @Override
                     public void onImageSaved(@NonNull File file) {
                         String msg = "Pic captured at " + file.getAbsolutePath();
-                        Toast.makeText(getBaseContext(), msg,Toast.LENGTH_LONG).show();
+                        Toast.makeText(getBaseContext(), msg, Toast.LENGTH_LONG).show();
+
+                        //upload to firebase
+
+                        if (algo == "FFNN") {
+
+                            Map<String, Object> docData = new HashMap<>();
+                            docData.put("stringExample", "Hello world!");
+                            docData.put("booleanExample", true);
+                            docData.put("numberExample", 3.14159265);
+                            docData.put("dateExample", new Timestamp(new Date()));
+                            docData.put("listExample", Arrays.asList(1, 2, 3));
+                            docData.put("nullExample", null);
+
+                            Map<String, Object> nestedData = new HashMap<>();
+                            nestedData.put("a", 5);
+                            nestedData.put("b", true);
+
+                            docData.put("objectExample", nestedData);
+
+
+                            db.collection("FFNN_download").document(String.valueOf(millis))
+                                    .set(docData)
+                                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                        @Override
+                                        public void onSuccess(Void aVoid) {
+                                            Log.d(TAG, "DocumentSnapshot successfully written!");
+                                        }
+                                    })
+                                    .addOnFailureListener(new OnFailureListener() {
+                                        @Override
+                                        public void onFailure(@NonNull Exception e) {
+                                            Log.w(TAG, "Error writing document", e);
+                                        }
+                                    });
+                        }
+                        if (algo == "CNN") {
+
+                            Map<String, Object> docData = new HashMap<>();
+                            docData.put("stringExample", "Hello world!");
+                            docData.put("booleanExample", true);
+                            docData.put("numberExample", 3.14159265);
+                            docData.put("dateExample", new Timestamp(new Date()));
+                            docData.put("listExample", Arrays.asList(1, 2, 3));
+                            docData.put("nullExample", null);
+
+                            Map<String, Object> nestedData = new HashMap<>();
+                            nestedData.put("a", 5);
+                            nestedData.put("b", true);
+
+                            docData.put("objectExample", nestedData);
+
+
+                            db.collection("CNN_download_log").document(String.valueOf(millis))
+                                    .set(docData)
+                                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                        @Override
+                                        public void onSuccess(Void aVoid) {
+                                            Log.d(TAG, "DocumentSnapshot successfully written!");
+                                            Map<String, Object> entry = new HashMap<>();
+                                            Uri file2 = Uri.fromFile(new File(path));
+                                            entry.put(String.valueOf(millis),file2.getLastPathSegment());
+
+                                            StorageReference storageRef = FirebaseStorage.getInstance().getReference(file2.getLastPathSegment());
+                                            storageRef.putFile(file2);
+
+
+                                            // upload
+                                            //Uri.fromFile(new File("/sdcard/cats.jpg")
+
+                                            Log.d(TAG, path +  String.valueOf(millis));
+                                            StorageReference riversRef = storageRef.child(String.valueOf(millis));
+                                            UploadTask uploadTask = riversRef.putFile(file2);
+
+//                                             Register observers to listen for when the download is done or if it fails
+
+
+                                        }
+                                    })
+                                    .addOnFailureListener(new OnFailureListener() {
+                                        @Override
+                                        public void onFailure(@NonNull Exception e) {
+                                            Log.w(TAG, "Error writing document", e);
+                                        }
+                                    });
+
+
+                            // Add a new document with a generated ID
+
+
+                            //wait for result
+                            //set result to global variables
+                            //open new activity and display
+                        }
                     }
 
                     @Override
