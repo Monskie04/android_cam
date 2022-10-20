@@ -187,18 +187,18 @@ public class MainActivity extends AppCompatActivity {
                                             Log.d(TAG, "DocumentSnapshot successfully written!");
                                             Map<String, Object> entry = new HashMap<>();
                                             Uri file2 = Uri.fromFile(new File(path));
-                                            entry.put(String.valueOf(millis),file2.getLastPathSegment());
+                                            entry.put("images",file2.getLastPathSegment());
 
                                             StorageReference storageRef = FirebaseStorage.getInstance().getReference(file2.getLastPathSegment());
-                                            storageRef.putFile(file2);
+                                           storageRef.putFile(file2);
 
 
                                             // upload
                                             //Uri.fromFile(new File("/sdcard/cats.jpg")
 
-                                            Log.d(TAG, path +  String.valueOf(millis));
-                                            StorageReference riversRef = storageRef.child(String.valueOf(millis));
-                                            UploadTask uploadTask = riversRef.putFile(file2);
+//                                            Log.d(TAG, path +  String.valueOf(millis));
+//                                            StorageReference riversRef = storageRef.child(String.valueOf(millis));
+//                                            UploadTask uploadTask = riversRef.putFile(file2);
 
 //                                             Register observers to listen for when the download is done or if it fails
 
