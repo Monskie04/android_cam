@@ -3,6 +3,7 @@ package com.example.androidcam;
 import static android.content.ContentValues.TAG;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 
 import android.net.Uri;
@@ -70,16 +71,16 @@ public class MainActivity extends AppCompatActivity {
     File file1;
     long millis;
     String path;
+    String keyText, activeAlgo;
 
    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        //getSupportActionBar().hide();
-
         textureView=(TextureView) findViewById(R.id.view_Finder);
-
+       keyText = getIntent().getStringExtra("keyText");
+        algo = String.valueOf(getIntent().getStringExtra("activeAlgo"));
+       Toast.makeText(getBaseContext(), algo, Toast.LENGTH_LONG).show();
         if(allPermissionGranted()){
 
             startCamera();
@@ -130,7 +131,7 @@ public class MainActivity extends AppCompatActivity {
 
                         //upload to firebase
 
-                        if (algo == "FFNN") {
+                        if (algo.equals("FFNN")) {
 
                             Map<String, Object> docData = new HashMap<>();
                             docData.put("stringExample", "Hello world!");
@@ -147,12 +148,22 @@ public class MainActivity extends AppCompatActivity {
                             docData.put("objectExample", nestedData);
 
 
-                            db.collection("FFNN_download").document(String.valueOf(millis))
+                            db.collection("FFNN_download_log").document(String.valueOf(millis))
                                     .set(docData)
                                     .addOnSuccessListener(new OnSuccessListener<Void>() {
                                         @Override
                                         public void onSuccess(Void aVoid) {
                                             Log.d(TAG, "DocumentSnapshot successfully written!");
+                                            Map<String, Object> entry = new HashMap<>();
+                                            Uri file2 = Uri.fromFile(new File(path));
+                                            entry.put("images",file2.getLastPathSegment());
+
+                                            StorageReference storageRef = FirebaseStorage.getInstance().getReference(file2.getLastPathSegment());
+                                            storageRef.putFile(file2);
+                                            Intent intent2 = new Intent(getBaseContext(), ResultActivity.class);
+                                            intent2.putExtra("id", String.valueOf(millis));
+                                            startActivity(intent2);
+
                                         }
                                     })
                                     .addOnFailureListener(new OnFailureListener() {
@@ -162,8 +173,9 @@ public class MainActivity extends AppCompatActivity {
                                         }
                                     });
                         }
-                        if (algo == "CNN") {
 
+
+                        else if (algo.equals("CNN")) {
                             Map<String, Object> docData = new HashMap<>();
                             docData.put("stringExample", "Hello world!");
                             docData.put("booleanExample", true);
@@ -190,19 +202,10 @@ public class MainActivity extends AppCompatActivity {
                                             entry.put("images",file2.getLastPathSegment());
 
                                             StorageReference storageRef = FirebaseStorage.getInstance().getReference(file2.getLastPathSegment());
-                                           storageRef.putFile(file2);
-
-
-                                            // upload
-                                            //Uri.fromFile(new File("/sdcard/cats.jpg")
-
-//                                            Log.d(TAG, path +  String.valueOf(millis));
-//                                            StorageReference riversRef = storageRef.child(String.valueOf(millis));
-//                                            UploadTask uploadTask = riversRef.putFile(file2);
-
-//                                             Register observers to listen for when the download is done or if it fails
-
-
+                                            storageRef.putFile(file2);
+                                            Intent intent1 = new Intent(getBaseContext(), ResultActivity.class);
+                                            intent1.putExtra("id", String.valueOf(millis));
+                                            startActivity(intent1);
                                         }
                                     })
                                     .addOnFailureListener(new OnFailureListener() {
@@ -211,16 +214,8 @@ public class MainActivity extends AppCompatActivity {
                                             Log.w(TAG, "Error writing document", e);
                                         }
                                     });
+                        }}
 
-
-                            // Add a new document with a generated ID
-
-
-                            //wait for result
-                            //set result to global variables
-                            //open new activity and display
-                        }
-                    }
 
                     @Override
                     public void onError(@NonNull ImageCapture.UseCaseError useCaseError, @NonNull String message, @Nullable Throwable cause) {
