@@ -162,6 +162,8 @@ public class MainActivity extends AppCompatActivity {
                                             storageRef.putFile(file2);
                                             Intent intent2 = new Intent(getBaseContext(), ResultActivity.class);
                                             intent2.putExtra("id", String.valueOf(millis));
+                                            intent2.putExtra("algo", algo);
+                                            intent2.putExtra("filepath", path);
                                             startActivity(intent2);
 
                                         }
@@ -205,6 +207,9 @@ public class MainActivity extends AppCompatActivity {
                                             storageRef.putFile(file2);
                                             Intent intent1 = new Intent(getBaseContext(), ResultActivity.class);
                                             intent1.putExtra("id", String.valueOf(millis));
+                                            intent1.putExtra("id", String.valueOf(millis));
+                                            intent1.putExtra("algo", algo);
+                                            intent1.putExtra("filepath", path);
                                             startActivity(intent1);
                                         }
                                     })
