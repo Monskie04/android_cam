@@ -24,6 +24,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.os.Environment;
 import android.util.Log;
 import android.util.Rational;
 import android.util.Size;
@@ -121,7 +122,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 millis = System.currentTimeMillis();
-                path = "storage/emulated/0/"+ millis;
+                path = getBaseContext().getExternalFilesDir(Environment.DIRECTORY_PICTURES)+File.separator+ millis;
                  file1  = new File(path);
                 imgCap.takePicture(file1, new ImageCapture.OnImageSavedListener() {
                     @Override
