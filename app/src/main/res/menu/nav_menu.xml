@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn = "navigation_view">
+
+
+    <group android:checkableBehavior="single">
+        <item
+            android:title="Home"
+            android:icon="@drawable/ic_baseline_home_24"
+            android:id="@+id/nav_home"
+
+            />
+        <item
+            android:title="Camera"
+            android:icon="@drawable/ic_baseline_camera_alt_24"
+            android:id="@+id/nav_camera"
+            />
+        <item
+            android:title="Favorites"
+            android:icon="@drawable/ic_baseline_favorite_24"
+            android:id="@+id/nav_favorite"
+            />
+        <item
+            android:title="Gemstone Database"
+            android:icon="@drawable/ic_baseline_library_books_24"
+            android:id="@+id/nav_gemData"
+            />
+        <item
+            android:title="about us "
+            android:icon="@drawable/ic_baseline_group_24"
+            android:id="@+id/nav_aboutus"
+            />
+    </group>
+
+    <item android:title=""
+        >
+        <menu>
+            <group android:checkableBehavior="single">
+                <item
+                    android:title="Setting"
+                    android:icon="@drawable/ic_baseline_settings_24"
+                    android:id="@+id/setting"
+                    />
+                <item
+                    android:title="Support"
+                    android:icon="@drawable/ic_baseline_support_agent_24"
+                    android:id="@+id/support"
+                    />
+
+                <item
+                    android:title="Logout"
+                    android:icon="@drawable/ic_baseline_login_24"
+                    android:id="@+id/nav_logout"
+                    />
+
+            </group>
+        </menu>
+    </item>
+</menu>
