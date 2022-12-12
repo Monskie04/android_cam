@@ -201,7 +201,7 @@
                     android:layout_alignParentBottom="true"
                     android:background="?android:attr/selectableItemBackground"
                     android:padding="20dp"
-                    android:text="Triangle"
+                    android:text="Expand All"
                     android:textColor="@color/black" />
 
                 <ImageView

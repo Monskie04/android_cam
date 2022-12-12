@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/monra/Desktop/Monray/AndroidCam/app/src/main/res/drawable/backgroundgradient.xml" value="0.1" />
         <entry key="..\:/Users/monra/Desktop/Monray/AndroidCam/app/src/main/res/drawable/ic_baseline_camera_alt_24.xml" value="0.2595" />
         <entry key="..\:/Users/monra/Desktop/Monray/AndroidCam/app/src/main/res/drawable/ic_baseline_emoji_objects_24.xml" value="0.2595" />
         <entry key="..\:/Users/monra/Desktop/Monray/AndroidCam/app/src/main/res/layout/activity_dashboard.xml" value="0.2" />
@@ -16,6 +17,7 @@
         <entry key="..\:/Users/monra/Desktop/Monray/AndroidCam/app/src/main/res/layout/fragment_first.xml" value="0.22282608695652173" />
         <entry key="..\:/Users/monra/Desktop/Monray/AndroidCam/app/src/main/res/layout/fragment_gemdata.xml" value="0.1" />
         <entry key="..\:/Users/monra/Desktop/Monray/AndroidCam/app/src/main/res/layout/fragment_home.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/monra/Desktop/Monray/AndroidCam/app/src/main/res/layout/fragment_quiz_.xml" value="0.1" />
         <entry key="..\:/Users/monra/Desktop/Monray/AndroidCam/app/src/main/res/layout/fragment_second.xml" value="0.22282608695652173" />
         <entry key="..\:/Users/monra/Desktop/Monray/AndroidCam/app/src/main/res/layout/nav_hearder.xml" value="0.16032608695652173" />
         <entry key="..\:/Users/monra/Desktop/Monray/AndroidCam/app/src/main/res/menu/menu_main.xml" value="0.1" />
