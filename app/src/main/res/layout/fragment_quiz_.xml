@@ -9,6 +9,16 @@
 
 
     <!-- TODO: Update blank fragment layout -->
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/total_question"
+        android:text="Total Questions "
+        android:layout_centerHorizontal="true"
+        android:textSize="20dp"/>
+
     <TextView
         android:id="@+id/question"
         android:layout_width="match_parent"

@@ -51,6 +51,17 @@ public class home extends Fragment {
                 replaceFragment(new gemdata());
             }
         });
+
+
+
+        cardFavs.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                replaceFragment(new quiz_Fragment());
+
+            }
+        });
         return v;
     }
 
