@@ -2,6 +2,7 @@ package com.example.androidcam;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -46,7 +47,7 @@ private  DrawerLayout drawerLayout;
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new home()).commit();
                 break;
             case R.id.nav_camera:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new camera()).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new favs()).commit();
                 break;
             case R.id.nav_favorite:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new favs()).commit();
@@ -71,4 +72,6 @@ private  DrawerLayout drawerLayout;
             super.onBackPressed();
         }
 }
+
 }
+

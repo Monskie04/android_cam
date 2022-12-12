@@ -38,6 +38,7 @@ public class landing_activity extends AppCompatActivity {
      setContentView(binding.getRoot());
 
 
+
         // on below line we are initializing our variables.
         switchCNN = findViewById(R.id.switchCNN);
         switchFFNN = findViewById(R.id.switchFFNN);

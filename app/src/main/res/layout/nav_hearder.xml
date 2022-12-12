@@ -7,26 +7,27 @@
     android:paddingRight="16dp"
     android:paddingLeft="16dp"
     android:layout_marginBottom="40dp"
-    android:background="#0E66B9">
+    android:background="#5d5C61">
 
     <de.hdodenhof.circleimageview.CircleImageView
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:layout_marginTop="80dp"
-        android:layout_marginLeft="10dp"
-        android:src="@drawable/icon"
+        android:id="@+id/imageView"
+        android:layout_width="81dp"
+        android:layout_height="78dp"
         android:layout_centerVertical="true"
-        android:id="@+id/imageView"/>
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="80dp"
+        android:src="@drawable/geometryicon" />
+
     <TextView
+        android:id="@+id/name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="@+id/imageView"
-        android:id="@+id/name"
-        android:layout_marginLeft="20dp"
         android:layout_centerVertical="true"
-        android:text="Gemstone Claassification"
-        android:textColor="#fff"
-        android:textSize="14sp"
+        android:layout_marginLeft="20dp"
+        android:layout_toRightOf="@+id/imageView"
         android:fontFamily="@font/nunito_semibold"
+        android:text="Object Geometric Claassification"
+        android:textColor="@color/lightWhite"
+        android:textSize="24sp"
         />
 </RelativeLayout>
