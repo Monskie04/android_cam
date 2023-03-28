@@ -1,55 +1,105 @@
 package com.example.androidcam;
 
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import java.io.File;
+import java.util.Random;
 
 
 public class quiz_Fragment extends Fragment  implements View.OnClickListener {
 
     TextView totalQuestionsTextView;
-    TextView questionTextView;
+    TextView questionTextView,questt;
     Button ansA, ansB, ansC, ansD;
+    String txtAns_A, txtAns_B, txtAns_C, txtAns_D;
+    int ans_key;
     Button submitBt;
     int score = 0;
     int totalQuestion = QuestionAns.question.length;
     int currentQuestionIndex = 0;
-    String selectedAnswer = "";
+    int a,b,c,d,ans;
+    String selectedAnswer = "", id,result,path;
+    String[] shapes = {"square","star","triangle","pentagon","rectangle","heart","hexagon","circle","crescent","cross"};
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_quiz_, container, false);
-        questionTextView = v.findViewById(R.id.question);
         ansA = v.findViewById(R.id.ans_A);
         ansB = v.findViewById(R.id.ans_B);
         ansC = v.findViewById(R.id.ans_C);
         ansD = v.findViewById(R.id.ans_D);
-        submitBt = v.findViewById(R.id.submit);
-        totalQuestionsTextView = v.findViewById(R.id.total_question);
-        questionTextView = v.findViewById(R.id.question);
-
+        questt = v.findViewById(R.id.question);
         ansA.setOnClickListener(this);
         ansB.setOnClickListener(this);
         ansC.setOnClickListener(this);
         ansD.setOnClickListener(this);
-        submitBt.setOnClickListener(this);
 
-        totalQuestionsTextView.setText("Total questions : " + totalQuestion);
+        llooding activity = (llooding) getActivity();
+        id = activity.getQuizID();
+        path = activity.getFilepath();
+        result = activity.getResult();
 
-        loadNewQuestion();
+        File imgFile = new File(path);
+
+        if(imgFile.exists()){
+
+            Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
+
+            ImageView myImage = v.findViewById(R.id.imageView3);
+
+            myImage.setImageBitmap(myBitmap);
+
+        }
+        ans= new Random().nextInt(4);
+        do {
+            a= new Random().nextInt(10);
+            ansA.setText(shapes[a]);
+        } while( a == ans);
+        do {
+            b= new Random().nextInt(10);;
+            ansB.setText(shapes[b]);
+        } while(b == a || b == ans);
+        do {
+            c= new Random().nextInt(10);;
+            ansC.setText(shapes[c]);
+        } while(c==a || c ==b|| c == ans);
+        do {
+            d= new Random().nextInt(10);;
+            ansD.setText(shapes[d]);
+        } while(d==c || d==b || d ==a|| d == ans);
+
+
+        if(ans == 0) {
+            ansA.setText(result);
+        }
+        if(ans == 1) {
+            ansB.setText(result);
+        }
+        if(ans == 2) {
+            ansC.setText(result);
+        }
+        if(ans == 3) {
+            ansD.setText(result);
+        }
 
         return v;
-
 
     }
 
@@ -57,61 +107,118 @@ public class quiz_Fragment extends Fragment  implements View.OnClickListener {
     @Override
     public void onClick(View v) {
 
-        ansA.setBackgroundColor(Color.WHITE);
-        ansB.setBackgroundColor(Color.WHITE);
-        ansC.setBackgroundColor(Color.WHITE);
-        ansD.setBackgroundColor(Color.WHITE);
-
         Button clickedButton = (Button) v;
-        if (clickedButton.getId() == R.id.submit) {
-            if (selectedAnswer.equals(QuestionAns.correctAns[currentQuestionIndex])) {
-                score++;
+        if (clickedButton.getId() == R.id.ans_A) {
+
+          if(ans == 0){
+
+              questt.setText("Correct! Good Job!");
+              launch_new();
+          }
+          else {
+
+              questt.setText("Wrong! Try again.");
+              Handler handler = new Handler();
+              handler.postDelayed(new Runnable() {
+                  public void run() {
+
+                      questt.setText("What shape is this?");
+                  }
+              }, 500);
+          }
+
+
+
+
+
+        }
+
+        if (clickedButton.getId() == R.id.ans_B) {
+
+
+            if(ans == 1){
+
+                questt.setText("Correct! Good Job!");
+                launch_new();
             }
-            currentQuestionIndex++;
-            loadNewQuestion();
+            else {
 
-        }else{
-            //choices button clicked
-            selectedAnswer  = clickedButton.getText().toString();
-            clickedButton.setBackgroundColor(Color.BLUE);
+                questt.setText("Wrong! Try again.");
+                Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    public void run() {
+
+                        questt.setText("What shape is this?");
+                    }
+                }, 500);
+            }
 
         }
 
-    }
+        if (clickedButton.getId() == R.id.ans_C) {
 
-    void loadNewQuestion() {
-        if(currentQuestionIndex == totalQuestion ){
-            finishQuiz();
-            return;
+
+            if(ans == 2){
+
+                questt.setText("Correct! Good Job!");
+                launch_new();
+            }
+            else {
+
+                questt.setText("Wrong! Try again.");
+                Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    public void run() {
+
+                        questt.setText("What shape is this?");
+                    }
+                }, 500);
+            }
+
         }
 
-        questionTextView.setText(QuestionAns.question[currentQuestionIndex]);
-        ansA.setText(QuestionAns.choices[currentQuestionIndex][0]);
-        ansB.setText(QuestionAns.choices[currentQuestionIndex][1]);
-        ansC.setText(QuestionAns.choices[currentQuestionIndex][2]);
-        ansD.setText(QuestionAns.choices[currentQuestionIndex][3]);
-    }
+        if (clickedButton.getId() == R.id.ans_D) {
 
-    void finishQuiz(){
-        String passStatus = "";
-        if(score > totalQuestion*0.60){
-            passStatus = "Passed";
-        }else{
-            passStatus = "Failed";
+
+            if(ans == 3){
+
+                questt.setText("Correct! Good Job!");
+                launch_new();
+            }
+            else {
+
+                questt.setText("Wrong! Try again.");
+
+                Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    public void run() {
+
+                        questt.setText("What shape is this?");
+                    }
+                }, 700);
+            }
+
         }
 
-        new AlertDialog.Builder(getActivity())
-                .setTitle(passStatus)
-                .setMessage("Score is "+ score+" out of "+ totalQuestion)
-                .setPositiveButton("Restart",(dialogInterface, i) -> restartQuiz() )
-                .setCancelable(false)
-                .show();
 
 
     }
-    void restartQuiz(){
-        score = 0;
-        currentQuestionIndex =0;
-        loadNewQuestion();
-    }
+
+void launch_new() {
+    Handler handler = new Handler();
+    handler.postDelayed(new Runnable() {
+        public void run() {
+
+            Intent intent2 = new Intent(getActivity(), MainActivity.class);
+            intent2.putExtra("activeAlgo","quiz" );
+            startActivity(intent2);
+        }
+    }, 1500);
+
+}
+
+
+
+
+
 }

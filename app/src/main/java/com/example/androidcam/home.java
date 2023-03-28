@@ -57,8 +57,11 @@ public class home extends Fragment {
         cardFavs.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                replaceFragment(new quiz_Fragment());
+                // pass
+                 replaceFragment(new camera());
+                Intent intent2 = new Intent(getActivity(), MainActivity.class);
+                intent2.putExtra("activeAlgo","quiz" );
+                startActivity(intent2);
 
             }
         });

@@ -103,7 +103,7 @@ public class ResultActivity extends AppCompatActivity {
                   //  String s5 = snapshot.getString("username")
                   //  String s6 = snapshot.getString("username");
 
-                    String text = "Algorithm: \n" + algofull + "\nQuery ID: "+id+"\nPrediction Result: " + s2 + "\nConfidence Value: " + s1 + "\nPossible Results: circle,square,star,triangle";
+                    String text = "Algorithm: \n" + algofull + "\nQuery ID: "+id+"\nPrediction Result: " + s2 + "\nConfidence Value: " + s1 + "\nPossible Results: Square, Star, Triangle, \nPentagon, Rectangle, Heart, Hexagon, \nCircle, Crescent, Cross";
                     TextView tv1 = (TextView)findViewById(R.id.txtField);
                     tv1.setText(text);
 
@@ -135,7 +135,7 @@ public class ResultActivity extends AppCompatActivity {
 
 
                         }
-                    }, 5000);
+                    }, 0);
 
 
 

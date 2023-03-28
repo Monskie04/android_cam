@@ -63,6 +63,7 @@
             android:layout_width="156dp"
             android:layout_height="156dp"
             android:orientation="vertical"
+            android:rotation="90"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/imgv_result_2"
             app:layout_constraintHorizontal_bias="0.547"
@@ -75,9 +76,10 @@
         <TextView
             android:id="@+id/txtField"
             android:layout_width="320dp"
-            android:layout_height="150dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="24dp"
             android:lineSpacingExtra="6sp"
-            android:text="Algorithm: TEST \nPrediction: test \nField 1: test \nField 2: test"
+            android:text="loading results ..."
             android:textAlignment="viewStart"
             android:textAppearance="@style/TextAppearance.AppCompat.Display1"
             android:textSize="16sp"
@@ -86,29 +88,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.494"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <Button
-            android:id="@+id/btn_result_ok"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="68dp"
-            android:text="CLOSE"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.827" />
-
-        <Button
-            android:id="@+id/btn_result_retry"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="76dp"
-            android:text="RETRY"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.829" />
+            app:layout_constraintTop_toBottomOf="@+id/imgv_result_2" />
 
         <ImageView
             android:id="@+id/imgv_result_2"

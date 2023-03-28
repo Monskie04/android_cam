@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -12,14 +13,6 @@
 
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/total_question"
-        android:text="Total Questions "
-        android:layout_centerHorizontal="true"
-        android:textSize="20dp"/>
-
-    <TextView
         android:id="@+id/question"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -27,70 +20,73 @@
         android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="20dp"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="13dp"
         android:fontFamily="@font/nunito_semibold"
-        android:text="This will be the question"
+        android:text="What shape is this?"
         android:textAlignment="center"
         android:textColor="@color/lightWhite"
         android:textSize="24dp"
         android:textStyle="bold" />
 
     <LinearLayout
+        android:id="@+id/choicesLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:orientation="vertical"
-        android:id="@+id/choicesLayout">
+        android:orientation="vertical">
 
-
-
-
-
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="5dp"
-        android:backgroundTint="@color/white"
-        android:text="answer A"
-        android:id="@+id/ans_A"
-        android:textColor="@color/black"/>
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="5dp"
-        android:id="@+id/ans_B"
-        android:backgroundTint="@color/white"
-        android:text="answer B"
-        android:textColor="@color/black"/>
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="5dp"
-        android:backgroundTint="@color/white"
-        android:text="answer C"
-        android:id="@+id/ans_C"
-        android:textColor="@color/black"/>
 
         <Button
+            android:id="@+id/ans_A"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:backgroundTint="@color/white"
+            android:text="answer A"
+            android:textColor="@color/black" />
+
+        <Button
+            android:id="@+id/ans_B"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:backgroundTint="@color/white"
+            android:text="answer B"
+            android:textColor="@color/black" />
+
+        <Button
+            android:id="@+id/ans_C"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:backgroundTint="@color/white"
+            android:text="answer C"
+            android:textColor="@color/black" />
+
+        <Button
+            android:id="@+id/ans_D"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
             android:backgroundTint="@color/white"
             android:text="answer D"
-            android:id="@+id/ans_D"
-            android:textColor="@color/black"/>
+            android:textColor="@color/black" />
 
 
     </LinearLayout>
 
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/choicesLayout"
-        android:fontFamily="@font/nunito_semibold"
-        android:text="Submit"
-        android:layout_marginTop="40dp"
-        android:id="@+id/submit"/>
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="361dp"
+        android:layout_height="153dp"
+        android:layout_above="@+id/question"
+        android:layout_alignStart="@+id/choicesLayout"
+        android:layout_alignEnd="@+id/choicesLayout"
+        android:layout_marginStart="1dp"
+        android:layout_marginEnd="1dp"
+        android:layout_marginBottom="27dp"
+        android:rotation="90"
+        tools:src="@tools:sample/avatars" />
 
 
 </RelativeLayout>

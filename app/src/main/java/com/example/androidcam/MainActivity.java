@@ -60,6 +60,8 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.xml.transform.Result;
+
 public class MainActivity extends AppCompatActivity {
 
    private int REQUEST_CODE_PERMISSIONS = 101;
@@ -81,7 +83,7 @@ public class MainActivity extends AppCompatActivity {
         textureView=(TextureView) findViewById(R.id.view_Finder);
        keyText = getIntent().getStringExtra("keyText");
         algo = String.valueOf(getIntent().getStringExtra("activeAlgo"));
-       Toast.makeText(getBaseContext(), algo, Toast.LENGTH_LONG).show();
+
         if(allPermissionGranted()){
 
             startCamera();
@@ -128,7 +130,7 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onImageSaved(@NonNull File file) {
                         String msg = "Pic captured at " + file.getAbsolutePath();
-                        Toast.makeText(getBaseContext(), msg, Toast.LENGTH_LONG).show();
+
 
                         //upload to firebase
 
@@ -220,13 +222,60 @@ public class MainActivity extends AppCompatActivity {
                                             Log.w(TAG, "Error writing document", e);
                                         }
                                     });
-                        }}
+                        }
+
+                        else if (algo.equals("quiz")) {
+                            Map<String, Object> docData = new HashMap<>();
+                            docData.put("stringExample", "Hello world!");
+                            docData.put("booleanExample", true);
+                            docData.put("numberExample", 3.14159265);
+                            docData.put("dateExample", new Timestamp(new Date()));
+                            docData.put("listExample", Arrays.asList(1, 2, 3));
+                            docData.put("nullExample", null);
+
+                            Map<String, Object> nestedData = new HashMap<>();
+                            nestedData.put("a", 5);
+                            nestedData.put("b", true);
+
+                            docData.put("objectExample", nestedData);
+
+
+                            db.collection("CNN_download_log").document(String.valueOf(millis))
+                                    .set(docData)
+                                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                        @Override
+                                        public void onSuccess(Void aVoid) {
+                                            Log.d(TAG, "DocumentSnapshot successfully written!");
+                                            Map<String, Object> entry = new HashMap<>();
+                                            Uri file2 = Uri.fromFile(new File(path));
+                                            entry.put("images",file2.getLastPathSegment());
+
+                                            StorageReference storageRef = FirebaseStorage.getInstance().getReference(file2.getLastPathSegment());
+                                            storageRef.putFile(file2);
+                                            Intent intentQuiz = new Intent(getBaseContext(), llooding.class);
+                                            intentQuiz.putExtra("id", String.valueOf(millis));
+                                            intentQuiz.putExtra("algo", "CNN");
+                                            intentQuiz.putExtra("type", "quiz");
+                                            intentQuiz.putExtra("filepath", path);
+                                            startActivity(intentQuiz);
+                                        }
+                                    })
+                                    .addOnFailureListener(new OnFailureListener() {
+                                        @Override
+                                        public void onFailure(@NonNull Exception e) {
+                                            Log.w(TAG, "Error writing document", e);
+                                        }
+                                    });
+                        }
+
+
+                    }
 
 
                     @Override
                     public void onError(@NonNull ImageCapture.UseCaseError useCaseError, @NonNull String message, @Nullable Throwable cause) {
                         String msg = "Pic capture failed : " + message;
-                        Toast.makeText(getBaseContext(), msg, Toast.LENGTH_LONG).show();
+
                         if (cause != null) {
                             cause.printStackTrace();
 
